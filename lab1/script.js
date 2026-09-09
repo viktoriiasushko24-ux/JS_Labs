@@ -1,31 +1,35 @@
-console.log(`Інструкція:
-Використовуйте функцію triangle(val1, type1, val2, type2);
-Допустимі типи: "leg", "hypotenuse", "adjacent angle", "opposite angle", "angle".
-Кути задаються в градусах.`);
+console.log("Інструкція:\nВикористовуйте функцію triangle(val1, type1, val2, type2);\nДопустимі типи: 'leg', 'hypotenuse', 'adjacent angle', 'opposite angle', 'angle'.\nКути задаються в градусах.");
+
+// Звичайні базові функції для переведення кутів
+function toRad(deg) {
+  return (deg * Math.PI) / 180;
+}
+
+function toDeg(rad) {
+  return (rad * 180) / Math.PI;
+}
 
 function triangle(v1, t1, v2, t2) {
+  // 1. Перевірка на від'ємні значення та нуль
   if (typeof v1 !== "number" || typeof v2 !== "number" || v1 <= 0 || v2 <= 0) {
     return "Zero or negative input";
   }
 
   let a, b, c, alpha, beta;
-  const toRad = deg => (deg * Math.PI) / 180;
-  const toDeg = rad => (rad * 180) / Math.PI;
 
-  let p = {};
-  p[t1] = v1;
-  p[t2] = v2;
+  // 2. Випадок: катет і гіпотенуза
+  if ((t1 === "leg" && t2 === "hypotenuse") || (t1 === "hypotenuse" && t2 === "leg")) {
+    a = (t1 === "leg") ? v1 : v2;
+    c = (t1 === "hypotenuse") ? v1 : v2;
 
-  // 1. leg & hypotenuse
-  if (p["leg"] && p["hypotenuse"]) {
-    a = p["leg"];
-    c = p["hypotenuse"];
-    if (a >= c) return "Failed: leg must be smaller than hypotenuse";
+    if (a >= c) {
+      return "Failed: leg must be smaller than hypotenuse";
+    }
     b = Math.sqrt(c * c - a * a);
     alpha = toDeg(Math.asin(a / c));
     beta = 90 - alpha;
   }
-  // 2. leg & leg
+  // 3. Випадок: два катети
   else if (t1 === "leg" && t2 === "leg") {
     a = v1;
     b = v2;
@@ -33,41 +37,54 @@ function triangle(v1, t1, v2, t2) {
     alpha = toDeg(Math.atan(a / b));
     beta = 90 - alpha;
   }
-  // 3. leg & adjacent angle
-  else if (p["leg"] && p["adjacent angle"]) {
-    b = p["leg"];
-    alpha = p["adjacent angle"];
-    if (alpha >= 90) return "Failed: angle must be acute (< 90°)";
+  // 4. Випадок: катет і прилеглий кут
+  else if ((t1 === "leg" && t2 === "adjacent angle") || (t1 === "adjacent angle" && t2 === "leg")) {
+    b = (t1 === "leg") ? v1 : v2;
+    alpha = (t1 === "adjacent angle") ? v1 : v2;
+
+    if (alpha >= 90) {
+      return "Failed: angle must be acute (< 90°)";
+    }
     beta = 90 - alpha;
     c = b / Math.cos(toRad(alpha));
     a = Math.sqrt(c * c - b * b);
   }
-  // 4. leg & opposite angle
-  else if (p["leg"] && p["opposite angle"]) {
-    a = p["leg"];
-    alpha = p["opposite angle"];
-    if (alpha >= 90) return "Failed: angle must be acute (< 90°)";
+  // 5. Випадок: катет і протилежний кут
+  else if ((t1 === "leg" && t2 === "opposite angle") || (t1 === "opposite angle" && t2 === "leg")) {
+    a = (t1 === "leg") ? v1 : v2;
+    alpha = (t1 === "opposite angle") ? v1 : v2;
+
+    if (alpha >= 90) {
+      return "Failed: angle must be acute (< 90°)";
+    }
     beta = 90 - alpha;
     c = a / Math.sin(toRad(alpha));
     b = Math.sqrt(c * c - a * a);
   }
-  // 5. hypotenuse & angle
-  else if (p["hypotenuse"] && p["angle"]) {
-    c = p["hypotenuse"];
-    alpha = p["angle"];
-    if (alpha >= 90) return "Failed: angle must be acute (< 90°)";
+  // 6. Випадок: гіпотенуза і кут
+  else if ((t1 === "hypotenuse" && t2 === "angle") || (t1 === "angle" && t2 === "hypotenuse")) {
+    c = (t1 === "hypotenuse") ? v1 : v2;
+    alpha = (t1 === "angle") ? v1 : v2;
+
+    if (alpha >= 90) {
+      return "Failed: angle must be acute (< 90°)";
+    }
     beta = 90 - alpha;
     a = c * Math.sin(toRad(alpha));
     b = c * Math.cos(toRad(alpha));
-  } else {
+  }
+  // 7. Помилкові типи або одруківки
+  else {
     console.log("Помилка: Неправильні типи аргументів. Перечитайте інструкцію.");
     return "failed";
   }
 
-  console.log(`a = ${a}`);
-  console.log(`b = ${b}`);
-  console.log(`c = ${c}`);
-  console.log(`alpha = ${alpha}`);
-  console.log(`beta = ${beta}`);
+  // Звичайний вивід через склеювання рядків
+  console.log("a = " + a);
+  console.log("b = " + b);
+  console.log("c = " + c);
+  console.log("alpha = " + alpha);
+  console.log("beta = " + beta);
+
   return "success";
 }
