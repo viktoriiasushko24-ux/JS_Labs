@@ -41,9 +41,9 @@ function triangle(v1, t1, v2, t2) {
     b = (t1 === "leg") ? v1 : v2;
     alpha = (t1 === "adjacent angle") ? v1 : v2;
 
-    if (alpha >= 90) {
-      return "Failed: angle must be acute (< 90°)";
-    }
+    if (alpha <= 0.000001 || alpha >= 90) {
+  return "Failed: angle must be acute (< 90° and > 0.000001)";
+}
     beta = 90 - alpha;
     c = b / Math.cos(toRad(alpha));
     a = Math.sqrt(c * c - b * b);
