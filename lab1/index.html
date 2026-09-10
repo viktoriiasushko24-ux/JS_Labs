@@ -6,75 +6,44 @@
   <style>
     body {
       font-family: sans-serif;
-      background-color: #f4f6f8;
-      padding: 30px 15px;
-      color: #333;
+      text-align: center;
+      padding-top: 50px;
+      background-color: #f4f4f4;
     }
-    .container {
-      max-width: 650px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 25px;
+    .box {
+      background: white;
+      display: inline-block;
+      padding: 30px;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h1 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-    h3 {
-      margin-top: 20px;
-      margin-bottom: 8px;
+    code {
+      background: #eee;
+      padding: 4px 8px;
+      border-radius: 4px;
       font-size: 16px;
-    }
-    .info {
-      background: #eef2ff;
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-    pre {
-      background: #2d3748;
-      color: #f7fafc;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 13px;
-      line-height: 1.6;
-      overflow-x: auto;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="box">
     <h1>Лабораторна робота №1</h1>
-    <div class="info">
-      Відкрийте консоль браузера: <b>F12 → вкладка Console</b>.
-    </div>
-
-    <h3>Тестові приклади з методички:</h3>
-    <pre><code>triangle(7, "leg", 18, "hypotenuse");
-triangle(60, "opposite angle", 5, "leg");</code></pre>
-
-    <h3>Перевірка довільного порядку аргументів:</h3>
-    <pre><code>triangle(4, "leg", 8, "hypotenuse");
-triangle(8, "hypotenuse", 4, "leg");</code></pre>
-
-    <h3>Перевірка некоректних значень (помилки):</h3>
-    <pre><code>// 1. Від'ємне чи нульове значення
-triangle(43.13, "angle", -2, "hypotenuse");
-
-// 2. Катет більший або рівний гіпотенузі
-triangle(10, "leg", 5, "hypotenuse");
-
-// 3. Негострий кут (&gt;= 90°)
-triangle(5, "leg", 90, "adjacent angle");
-
-// 4. Помилка в назві типу або несумісні типи
-triangle(5, "hypotenus", 10, "leg");</code></pre>
+    <p>Відкрийте консоль браузера: <b>F12 → Console</b></p>
+    <br>
+    <p>Приклади для перевірки:</p>
+    <p><code>triangle(4, "leg", 8, "hypotenuse");
+      triangle(7, "leg", 18, "hypotenuse");
+      triangle(60, "opposite angle", 5, "leg");
+      triangle(8, "hypotenuse", 4, "leg");
+      triangle(43.13, "angle", -2, "hypotenuse");
+      triangle(10, "leg", 5, "hypotenuse");
+      triangle(5, "leg", 90, "adjacent angle");
+      triangle(5, "hypotenus", 10, "leg");</code></p>
+    
   </div>
 
+  
   <script src="script.js"></script>
 </body>
 </html>
