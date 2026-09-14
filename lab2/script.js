@@ -138,7 +138,7 @@ class Rectangle extends Square {
   }
 
   info() {
-    console.log("--- Інформація про Rectangle ---");
+    console.log("Інформація про Rectangle");
     console.log("Сторони: a = " + this.a + ", b = " + this.b + ", c = " + this.a + ", d = " + this.b);
     console.log("Кути: 90°, 90°, 90°, 90°");
     console.log("Сума сторін (периметр): " + (2 * (this.a + this.b)));
