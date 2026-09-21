@@ -1,5 +1,5 @@
 (function () {
-  // генерація масиву випадкових цілих чисел (довжина > 100)
+  //генерація масиву випадкових цілих чисел (довжина > 100)
   function generateRandomArray(length) {
     var arr = [];
     for (var i = 0; i < length; i++) {
@@ -32,8 +32,7 @@
     console.log("ТЕСТУВАННЯ: " + label);
 
     methods.forEach(function (method) {
-  console.log(method.name);
-  });
+      console.log(method.name);
       
       // За зростанням
       var resAsc = method.func(arrayToTest, true);
