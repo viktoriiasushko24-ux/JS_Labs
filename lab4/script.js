@@ -32,6 +32,8 @@
     console.log("ТЕСТУВАННЯ: " + label);
 
     methods.forEach(function (method) {
+  console.log(method.name);
+  });
       
       // За зростанням
       var resAsc = method.func(arrayToTest, true);
