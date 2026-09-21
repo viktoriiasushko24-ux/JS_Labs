@@ -1,5 +1,5 @@
 (function () {
-  // Функція для генерації базового масиву випадкових цілих чисел (довжина > 100)
+  //генерація масиву випадкових цілих чисел (довжина > 100)
   function generateRandomArray(length) {
     var arr = [];
     for (var i = 0; i < length; i++) {
@@ -8,17 +8,17 @@
     return arr;
   }
 
-  var size = 105; // довжина не менше 100 елементів
+  var size = 105; 
   var normalArray = generateRandomArray(size);
 
-  // Створення розрідженого масиву на базі копії (видаляємо частину індексів)
+  // розріджений масив на базі копії 
   var sparseArray = normalArray.slice();
   delete sparseArray[5];
   delete sparseArray[12];
   delete sparseArray[34];
   delete sparseArray[60];
   delete sparseArray[85];
-  sparseArray[110] = 777; // розширення довжини за рахунок дірок
+  sparseArray[110] = 777; 
 
   var methods = [
     { name: "Сортування обміном (Bubble Sort)", func: SortLibrary.bubbleSort },
@@ -30,12 +30,10 @@
 
   function runTests(arrayToTest, isSparse) {
     var label = isSparse ? "РОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")" : "НЕРОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")";
-    console.log("==================================================");
     console.log("ТЕСТУВАННЯ: " + label);
-    console.log("==================================================");
 
     methods.forEach(function (method) {
-      console.log("\n--- " + method.name + " ---");
+      console.log(method.name);
       
       // За зростанням
       var resAsc = method.func(arrayToTest, true);
@@ -49,9 +47,9 @@
     });
   }
 
-  // 1.2.3: Демонстрація на нерозрідженому масиві
+  // нерозріджений масив
   runTests(normalArray, false);
 
-  // 1.2.4: Демонстрація на розрідженому масиві
+  // розріджений масив
   runTests(sparseArray, true);
 })();
