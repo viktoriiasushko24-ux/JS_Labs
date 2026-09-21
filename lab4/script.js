@@ -1,4 +1,5 @@
 (function () {
+  // Функція для генерації базового масиву випадкових цілих чисел (довжина > 100)
   function generateRandomArray(length) {
     var arr = [];
     for (var i = 0; i < length; i++) {
@@ -7,16 +8,17 @@
     return arr;
   }
 
-  var size = 105;
+  var size = 105; // довжина не менше 100 елементів
   var normalArray = generateRandomArray(size);
 
+  // Створення розрідженого масиву на базі копії (видаляємо частину індексів)
   var sparseArray = normalArray.slice();
   delete sparseArray[5];
   delete sparseArray[12];
   delete sparseArray[34];
   delete sparseArray[60];
   delete sparseArray[85];
-  sparseArray[110] = 777;
+  sparseArray[110] = 777; // розширення довжини за рахунок дірок
 
   var methods = [
     { name: "Сортування обміном (Bubble Sort)", func: SortLibrary.bubbleSort },
@@ -28,22 +30,28 @@
 
   function runTests(arrayToTest, isSparse) {
     var label = isSparse ? "РОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")" : "НЕРОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")";
+    console.log("==================================================");
     console.log("ТЕСТУВАННЯ: " + label);
+    console.log("==================================================");
 
-    for (var m = 0; m < methods.length; m++) {
-      var currentMethod = methods[m];
-      console.log("\n--- " + currentMethod.name + " ---");
+    methods.forEach(function (method) {
+      console.log("\n--- " + method.name + " ---");
       
-      var resAsc = currentMethod.func(arrayToTest, true);
+      // За зростанням
+      var resAsc = method.func(arrayToTest, true);
       console.log("[Зростання] Порівнянь: " + resAsc.comparisons + ", Обмінів/переміщень: " + resAsc.swaps + 
                   (resAsc.undefinedCount > 0 ? " | undefined-елементів: " + resAsc.undefinedCount : ""));
       
-      var resDesc = currentMethod.func(arrayToTest, false);
+      // За спаданням
+      var resDesc = method.func(arrayToTest, false);
       console.log("[Спадання]  Порівнянь: " + resDesc.comparisons + ", Обмінів/переміщень: " + resDesc.swaps + 
                   (resDesc.undefinedCount > 0 ? " | undefined-елементів: " + resDesc.undefinedCount : ""));
-    }
+    });
   }
 
+  // 1.2.3: Демонстрація на нерозрідженому масиві
   runTests(normalArray, false);
+
+  // 1.2.4: Демонстрація на розрідженому масиві
   runTests(sparseArray, true);
 })();
