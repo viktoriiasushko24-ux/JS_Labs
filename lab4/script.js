@@ -1,5 +1,4 @@
 (function () {
-  //генерація масиву випадкових цілих чисел (довжина > 100)
   function generateRandomArray(length) {
     var arr = [];
     for (var i = 0; i < length; i++) {
@@ -8,7 +7,7 @@
     return arr;
   }
 
-  var size = 105; 
+  var size = 105;
   var normalArray = generateRandomArray(size);
 
   var sparseArray = normalArray.slice();
@@ -17,7 +16,7 @@
   delete sparseArray[34];
   delete sparseArray[60];
   delete sparseArray[85];
-  sparseArray[110] = 777; 
+  sparseArray[110] = 777;
 
   var methods = [
     { name: "Сортування обміном (Bubble Sort)", func: SortLibrary.bubbleSort },
@@ -31,24 +30,20 @@
     var label = isSparse ? "РОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")" : "НЕРОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")";
     console.log("ТЕСТУВАННЯ: " + label);
 
-    methods.forEach(function (method) {
-      console.log(method.name);
+    for (var m = 0; m < methods.length; m++) {
+      var currentMethod = methods[m];
+      console.log("\n--- " + currentMethod.name + " ---");
       
-      // За зростанням
-      var resAsc = method.func(arrayToTest, true);
+      var resAsc = currentMethod.func(arrayToTest, true);
       console.log("[Зростання] Порівнянь: " + resAsc.comparisons + ", Обмінів/переміщень: " + resAsc.swaps + 
                   (resAsc.undefinedCount > 0 ? " | undefined-елементів: " + resAsc.undefinedCount : ""));
       
-      // За спаданням
-      var resDesc = method.func(arrayToTest, false);
+      var resDesc = currentMethod.func(arrayToTest, false);
       console.log("[Спадання]  Порівнянь: " + resDesc.comparisons + ", Обмінів/переміщень: " + resDesc.swaps + 
                   (resDesc.undefinedCount > 0 ? " | undefined-елементів: " + resDesc.undefinedCount : ""));
-    });
+    }
   }
 
-  // нерозріджений масив
   runTests(normalArray, false);
-
-  // розріджений масив
   runTests(sparseArray, true);
 })();
