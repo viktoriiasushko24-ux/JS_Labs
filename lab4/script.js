@@ -1,26 +1,24 @@
 (function () {
-  //генерація масиву випадкових цілих чисел (довжина > 100)
   function generateRandomArray(length) {
-    var arr = [];
-    for (var i = 0; i < length; i++) {
+    let arr = [];
+    for (let i = 0; i < length; i++) {
       arr.push(Math.floor(Math.random() * 1000));
     }
     return arr;
   }
 
-  var size = 105; 
-  var normalArray = generateRandomArray(size);
+  let size = 105;
+  let normalArray = generateRandomArray(size);
 
-  // розріджений масив на базі копії 
-  var sparseArray = normalArray.slice();
+  let sparseArray = normalArray.slice();
   delete sparseArray[5];
   delete sparseArray[12];
   delete sparseArray[34];
   delete sparseArray[60];
   delete sparseArray[85];
-  sparseArray[110] = 777; 
+  sparseArray[110] = 777;
 
-  var methods = [
+  let methods = [
     { name: "Сортування обміном (Bubble Sort)", func: SortLibrary.bubbleSort },
     { name: "Сортування мінімальних елементів (Selection Sort)", func: SortLibrary.selectionSort },
     { name: "Сортування вставками (Insertion Sort)", func: SortLibrary.insertionSort },
@@ -29,27 +27,22 @@
   ];
 
   function runTests(arrayToTest, isSparse) {
-    var label = isSparse ? "РОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")" : "НЕРОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")";
+    let label = isSparse ? "РОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")" : "НЕРОЗРІДЖЕНИЙ МАСИВ (length: " + arrayToTest.length + ")";
     console.log("ТЕСТУВАННЯ: " + label);
 
     methods.forEach(function (method) {
       console.log(method.name);
-      
-      // За зростанням
-      var resAsc = method.func(arrayToTest, true);
+
+      let resAsc = method.func(arrayToTest, true);
       console.log("[Зростання] Порівнянь: " + resAsc.comparisons + ", Обмінів/переміщень: " + resAsc.swaps + 
                   (resAsc.undefinedCount > 0 ? " | undefined-елементів: " + resAsc.undefinedCount : ""));
-      
-      // За спаданням
-      var resDesc = method.func(arrayToTest, false);
+
+      let resDesc = method.func(arrayToTest, false);
       console.log("[Спадання]  Порівнянь: " + resDesc.comparisons + ", Обмінів/переміщень: " + resDesc.swaps + 
                   (resDesc.undefinedCount > 0 ? " | undefined-елементів: " + resDesc.undefinedCount : ""));
     });
   }
 
-  // нерозріджений масив
   runTests(normalArray, false);
-
-  // розріджений масив
   runTests(sparseArray, true);
 })();
